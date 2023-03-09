@@ -1,5 +1,11 @@
 {
 	"variables": {
 		"SAFETY_IGNORE_IDS": ["41002", "51159"]
+	},
+	"npm": {
+		"silencedAlertIds": [
+			1088594,
+			1091147
+		]
 	}
 }
