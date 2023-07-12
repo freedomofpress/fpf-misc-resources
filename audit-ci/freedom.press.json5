@@ -5,6 +5,6 @@
     // severe.
     "low": true,
     "allowlist": [
-        "GHSA-c2qf-rxjj-qqgw",
+        "GHSA-j8xg-fqg3-53r7|optionator>word-wrap",
     ]
 }
