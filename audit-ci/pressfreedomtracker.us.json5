@@ -6,6 +6,5 @@
     "low": true,
     "allowlist": [
         "GHSA-36jr-mh4h-2g58",
-        "GHSA-j8xg-fqg3-53r7|optionator>word-wrap"
     ]
 }
