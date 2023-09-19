@@ -1,0 +1,15 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container: debian:bookworm
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: apt-get update && apt-get install jsonlint --yes
+      - name: Lint JSON
+        run: find . -not -type d -name '*.json' | xargs -n1 -exec jsonlint-php
