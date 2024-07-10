@@ -5,6 +5,6 @@
     // severe.
     "low": true,
     "allowlist": [
-
+		"GHSA-x3m3-4wpv-5vgc",  // dependency of modernizr, no fix available as of 2024-07-10
     ]
 }
