@@ -1,0 +1,51 @@
+name: Lint Github Actions
+
+on:
+  workflow_call:
+    inputs:
+      path:
+        type: string
+        default: "."
+      zizmor-version:
+        type: string
+        default: ">=1.2,<2.0"
+      zizmor-options:
+        type: string
+        default: ""
+    secrets:
+      gh-token:
+        required: true
+        type: string
+
+env:
+  PYTHON_VERSION: "3.12"
+
+permissions: {}
+
+jobs:
+  lint-actions:
+    name: Lint:Actions
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read  # required for private repositories
+      actions: read  # required for private repositories
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+
+    - name: Install python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: pip
+
+    - name: Install zizmor
+      run: python -m pip install 'zizmor${{ inputs.zizmor-version }}'
+
+    - name: Lint
+      run: zizmor ${{ inputs.path }} ${{ inputs.zizmor-options }}
+      env:
+        GH_TOKEN: ${{ secrets.gh-token }} 
