@@ -13,3 +13,17 @@ jobs:
         run: apt-get update && apt-get install jsonlint --yes
       - name: Lint JSON
         run: find . -not -type d -name '*.json' | xargs -n1 -exec jsonlint-php
+
+  # Lints this repos CI under `.github/workflows/`
+  lint-meta-actions:
+    uses: ./../../workflows/lint-actions.yaml
+    secrets:
+      gh-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # Lints the reusable workflows under `workflows/`
+  lint-actions:
+    uses: ./../../workflows/lint-actions.yaml
+    with:
+      path: workflows/
+    secrets:
+      gh-token: ${{ secrets.GITHUB_TOKEN }}
